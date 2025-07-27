@@ -1,35 +1,6 @@
 // Animals page functionality
-const animals = [
-  {
-    id: 1,
-    name: "Buddy",
-    breed: "Golden Retriever",
-    type: "dog",
-    age: "young",
-    size: "medium",
-    gender: "male",
-    price: 500,
-    description: "A friendly and energetic dog.",
-    vaccinated: true,
-    spayed: false,
-    location: "New York",
-  },
-  {
-    id: 2,
-    name: "Whiskers",
-    breed: "Siamese",
-    type: "cat",
-    age: "adult",
-    size: "small",
-    gender: "female",
-    price: 300,
-    description: "A graceful and intelligent cat.",
-    vaccinated: true,
-    spayed: true,
-    location: "Los Angeles",
-  },
-  // Add more animals here
-]
+// Use the global animals data provided by data/animals.js
+const animalsData = window.animals
 
 function createAnimalCard(animal) {
   return `
@@ -101,7 +72,7 @@ function loadAllAnimals() {
   const animalsContainer = document.getElementById("animals-grid")
   if (!animalsContainer) return
 
-  displayAnimals(animals)
+  displayAnimals(animalsData)
 }
 
 function displayAnimals(animalsToShow) {
@@ -138,7 +109,7 @@ function applyFilters() {
   const ageValue = ageFilter.value
   const sizeValue = sizeFilter.value
 
-  const filteredAnimals = animals.filter((animal) => {
+  const filteredAnimals = animalsData.filter((animal) => {
     return (
       (!typeValue || animal.type === typeValue) &&
       (!ageValue || animal.age === ageValue) &&
@@ -150,7 +121,7 @@ function applyFilters() {
 }
 
 function viewAnimalDetail(animalId) {
-  const animal = animals.find((a) => a.id === animalId)
+  const animal = animalsData.find((a) => a.id === animalId)
   if (!animal) return
 
   const detailText = `${animal.name} - ${animal.breed}

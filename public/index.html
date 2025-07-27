@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paws & Hearts - Animal Adoption Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/modals.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('loginModal')">&times;</span>
+            <div class="modal-header">
+                <h2>Welcome Back</h2>
+                <p>Sign in to your account</p>
+            </div>
+            <div id="loginError" class="error-message"></div>
+            <div id="loginSuccess" class="success-message"></div>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Sign In</button>
+            </form>
+            <div class="form-toggle">
+                Don't have an account? <a href="#" onclick="switchToRegister()">Sign up</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('registerModal')">&times;</span>
+            <div class="modal-header">
+                <h2>Create Account</h2>
+                <p>Join our community of animal lovers</p>
+            </div>
+            <div id="registerError" class="error-message"></div>
+            <div id="registerSuccess" class="success-message"></div>
+            <form id="registerForm" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label for="registerName">Full Name</label>
+                    <input type="text" id="registerName" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" name="password" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label for="registerConfirmPassword">Confirm Password</label>
+                    <input type="password" id="registerConfirmPassword" name="confirmPassword" required minlength="6">
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+            </form>
+            <div class="form-toggle">
+                Already have an account? <a href="#" onclick="switchToLogin()">Sign in</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h2>🐾 Paws & Hearts</h2>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#" class="nav-link active" onclick="showSection('home')">Home</a></li>
+                    <li><a href="#" class="nav-link" onclick="showSection('animals')">Adopt</a></li>
+                    <li><a href="#" class="nav-link" onclick="showSection('about')">About</a></li>
+                    <li><a href="#" class="nav-link" onclick="showSection('contact')">Contact</a></li>
+                    <li><a href="#" class="nav-link cart-link" onclick="showSection('cart')">Cart (<span id="cart-count">0</span>)</a></li>
+                </ul>
+                <div class="user-menu">
+                    <div id="guestMenu" class="user-menu">
+                        <button class="btn btn-secondary btn-small" onclick="openModal('loginModal')">Login</button>
+                        <button class="btn btn-primary btn-small" onclick="openModal('registerModal')">Sign Up</button>
+                    </div>
+                    <div id="userMenu" class="user-menu" style="display: none;">
+                        <div class="user-info">
+                            <div class="user-avatar" id="userAvatar">U</div>
+                            <span id="userName">User</span>
+                        </div>
+                        <button class="logout-btn" onclick="handleLogout()">Logout</button>
+                    </div>
+                </div>
+                <div class="hamburger" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Content will be loaded dynamically -->
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🐾 Paws & Hearts</h3>
+                    <p>Connecting loving families with animals in need since 2008.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#" onclick="showSection('animals')">Adopt</a></li>
+                        <li><a href="#" onclick="showSection('about')">About Us</a></li>
+                        <li><a href="#" onclick="showSection('contact')">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p>📧 info@pawsandhearts.com</p>
+                    <p>📞 (555) 123-4567</p>
+                    <p>📍 123 Animal Lane, Pet City, PC 12345</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Paws & Hearts. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts - Load in correct order -->
+    <script src="js/data/animals.js"></script>
+    <script src="js/utils/storage.js"></script>
+    <script src="js/components/modals.js"></script>
+    <script src="js/auth/auth.js"></script>
+    <script src="js/cart/cart.js"></script>
+    <script src="js/pages/home.js"></script>
+    <script src="js/pages/animals.js"></script>
+    <script src="js/pages/cart.js"></script>
+    <script src="js/pages/about.js"></script>
+    <script src="js/pages/contact.js"></script>
+    <script src="js/components/navigation.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

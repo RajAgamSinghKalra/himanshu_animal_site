@@ -90,3 +90,7 @@ function handleContactForm(e) {
   // Reset form
   e.target.reset()
 }
+
+// Expose contact page helpers globally
+window.getContactContent = getContactContent
+window.initializeContact = initializeContact

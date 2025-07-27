@@ -28,3 +28,6 @@ function getAboutContent() {
         </section>
     `
 }
+
+// Expose about page helper globally
+window.getAboutContent = getAboutContent

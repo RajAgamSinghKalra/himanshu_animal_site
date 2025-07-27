@@ -168,3 +168,7 @@ Location: ${animal.location}`
 
   alert(detailText)
 }
+
+// Expose animals page helpers globally
+window.getAnimalsContent = getAnimalsContent
+window.initializeAnimals = initializeAnimals

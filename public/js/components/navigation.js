@@ -39,22 +39,22 @@ function loadSection(sectionName) {
 
   switch (sectionName) {
     case "home":
-      content = "Home Content" // Placeholder for getHomeContent()
+      content = getHomeContent()
       break
     case "animals":
-      content = "Animals Content" // Placeholder for getAnimalsContent()
+      content = getAnimalsContent()
       break
     case "cart":
-      content = "Cart Content" // Placeholder for getCartContent()
+      content = getCartContent()
       break
     case "about":
-      content = "About Content" // Placeholder for getAboutContent()
+      content = getAboutContent()
       break
     case "contact":
-      content = "Contact Content" // Placeholder for getContactContent()
+      content = getContactContent()
       break
     default:
-      content = "Home Content" // Placeholder for getHomeContent()
+      content = getHomeContent()
   }
 
   mainContent.innerHTML = content
@@ -66,16 +66,20 @@ function loadSection(sectionName) {
 function initializeSection(sectionName) {
   switch (sectionName) {
     case "home":
-      console.log("Initializing Home Section") // Placeholder for initializeHome()
+      initializeHome()
       break
     case "animals":
-      console.log("Initializing Animals Section") // Placeholder for initializeAnimals()
+      initializeAnimals()
       break
     case "cart":
-      console.log("Initializing Cart Section") // Placeholder for initializeCart()
+      initializeCart()
       break
     case "contact":
-      console.log("Initializing Contact Section") // Placeholder for initializeContact()
+      initializeContact()
       break
   }
 }
+
+// Expose navigation functions globally
+window.showSection = showSection
+window.toggleMobileMenu = toggleMobileMenu

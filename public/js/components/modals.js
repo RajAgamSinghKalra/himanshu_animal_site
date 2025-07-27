@@ -64,3 +64,10 @@ function showMessage(modalId, type, message) {
     }
   }
 }
+
+// Expose functions globally for inline event handlers
+window.openModal = openModal
+window.closeModal = closeModal
+window.switchToLogin = switchToLogin
+window.switchToRegister = switchToRegister
+window.showMessage = showMessage

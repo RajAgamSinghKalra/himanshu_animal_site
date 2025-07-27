@@ -1,8 +1,7 @@
-// Import necessary modules
-const storage = require("./storage")
-const { openModal } = require("./modal")
-const animals = require("./animals")
-const { updateCartDisplay } = require("./cartDisplay")
+// Access globals provided by other scripts
+const storage = window.storage
+const animals = window.animals
+const { openModal } = window
 
 // Cart functionality
 function addToCart(animalId) {
@@ -119,3 +118,10 @@ For this demo, we'll clear your cart.`)
     updateCartDisplay()
   }
 }
+
+// Make cart functions globally accessible
+window.addToCart = addToCart
+window.removeFromCart = removeFromCart
+window.updateCartCount = updateCartCount
+window.proceedToAdoption = proceedToAdoption
+window.updateCartDisplay = updateCartDisplay

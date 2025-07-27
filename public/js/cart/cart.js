@@ -1,28 +1,26 @@
-// Access globals provided by other scripts
-const storage = window.storage
-const animals = window.animals
-const { openModal } = window
-
 // Cart functionality
-function addToCart(animalId) {
+// These functions are now globally accessible via `window.`
+// They rely on `window.storage`, `window.animals`, `window.openModal`, `window.updateCartCount`, `window.updateCartDisplay`
+
+window.addToCart = (animalId) => {
   // Check if user is logged in
-  const currentUser = storage.getCurrentUser()
+  const currentUser = window.storage.getCurrentUser()
   if (!currentUser) {
     alert("Please login to add animals to your cart.")
-    openModal("loginModal")
+    window.openModal("loginModal")
     return
   }
 
   console.log("Adding to cart:", animalId)
 
-  const animal = animals.find((a) => a.id === animalId)
+  const animal = window.animals.find((a) => a.id === animalId)
   if (!animal) {
     console.error("Animal not found:", animalId)
     return
   }
 
   // Check if animal is already in cart
-  const cart = storage.getCart()
+  const cart = window.storage.getCart()
   const existingItem = cart.find((item) => item.id === animalId)
   if (existingItem) {
     alert(`${animal.name} is already in your adoption cart!`)
@@ -40,10 +38,10 @@ function addToCart(animalId) {
     userId: currentUser.id,
   }
 
-  storage.addToCart(cartItem)
-  console.log("Cart after adding:", storage.getCart())
+  window.storage.addToCart(cartItem)
+  console.log("Cart after adding:", window.storage.getCart())
 
-  updateCartCount()
+  window.updateCartCount()
 
   // Show success message
   alert(`${animal.name} has been added to your adoption cart!`)
@@ -51,46 +49,46 @@ function addToCart(animalId) {
   // If we're on the cart page, refresh it
   const currentSection = document.querySelector(".section.active")
   if (currentSection && currentSection.id === "cart") {
-    updateCartDisplay()
+    window.updateCartDisplay()
   }
 }
 
-function removeFromCart(animalId) {
+window.removeFromCart = (animalId) => {
   console.log("Removing from cart:", animalId)
 
-  const initialLength = storage.getCartCount()
-  storage.removeFromCart(animalId)
+  const initialLength = window.storage.getCartCount()
+  window.storage.removeFromCart(animalId)
 
-  if (storage.getCartCount() < initialLength) {
-    console.log("Item removed. Cart now:", storage.getCart())
-    updateCartCount()
-    updateCartDisplay()
+  if (window.storage.getCartCount() < initialLength) {
+    console.log("Item removed. Cart now:", window.storage.getCart())
+    window.updateCartCount()
+    window.updateCartDisplay()
 
-    const removedAnimal = animals.find((a) => a.id === animalId)
+    const removedAnimal = window.animals.find((a) => a.id === animalId)
     if (removedAnimal) {
       alert(`${removedAnimal.name} has been removed from your cart.`)
     }
   }
 }
 
-function updateCartCount() {
+window.updateCartCount = () => {
   const cartCountElement = document.getElementById("cart-count")
   if (cartCountElement) {
-    const count = storage.getCartCount()
+    const count = window.storage.getCartCount()
     cartCountElement.textContent = count
     console.log("Cart count updated:", count)
   }
 }
 
-function proceedToAdoption() {
-  const currentUser = storage.getCurrentUser()
+window.proceedToAdoption = () => {
+  const currentUser = window.storage.getCurrentUser()
   if (!currentUser) {
     alert("Please login to proceed with adoption.")
-    openModal("loginModal")
+    window.openModal("loginModal")
     return
   }
 
-  const cart = storage.getCart()
+  const cart = window.storage.getCart()
   if (cart.length === 0) {
     alert("Your cart is empty!")
     return
@@ -113,15 +111,8 @@ In a real application, this would redirect to an adoption application form.
 For this demo, we'll clear your cart.`)
 
     // Clear cart
-    storage.clearCart()
-    updateCartCount()
-    updateCartDisplay()
+    window.storage.clearCart()
+    window.updateCartCount()
+    window.updateCartDisplay()
   }
 }
-
-// Make cart functions globally accessible
-window.addToCart = addToCart
-window.removeFromCart = removeFromCart
-window.updateCartCount = updateCartCount
-window.proceedToAdoption = proceedToAdoption
-window.updateCartDisplay = updateCartDisplay

@@ -1,11 +1,14 @@
 // Navigation functions
-function showSection(sectionName) {
+// These functions are now globally accessible via `window.`
+// They rely on `window.getHomeContent`, `window.initializeHome`, etc.
+
+window.showSection = (sectionName) => {
   // Hide all sections
   const sections = document.querySelectorAll(".section")
   sections.forEach((section) => section.classList.remove("active"))
 
   // Load and show the selected section
-  loadSection(sectionName)
+  window.loadSection(sectionName)
 
   // Update navigation - find the clicked link
   const navLinks = document.querySelectorAll(".nav-link")
@@ -24,14 +27,14 @@ function showSection(sectionName) {
   }
 }
 
-function toggleMobileMenu() {
+window.toggleMobileMenu = () => {
   const navMenu = document.querySelector(".nav-menu")
   if (navMenu) {
     navMenu.classList.toggle("active")
   }
 }
 
-function loadSection(sectionName) {
+window.loadSection = (sectionName) => {
   const mainContent = document.getElementById("main-content")
   if (!mainContent) return
 
@@ -39,47 +42,55 @@ function loadSection(sectionName) {
 
   switch (sectionName) {
     case "home":
-      content = getHomeContent()
+      content = window.getHomeContent()
       break
     case "animals":
-      content = getAnimalsContent()
+      content = window.getAnimalsContent()
       break
     case "cart":
-      content = getCartContent()
+      content = window.getCartContent()
       break
     case "about":
-      content = getAboutContent()
+      content = window.getAboutContent()
       break
     case "contact":
-      content = getContactContent()
+      content = window.getContactContent()
       break
     default:
-      content = getHomeContent()
+      content = window.getHomeContent() // Default to home
   }
 
   mainContent.innerHTML = content
 
-  // Initialize page-specific functionality
-  initializeSection(sectionName)
+  // After content is loaded, find the newly inserted section and add the 'active' class
+  const loadedSection = document.getElementById(sectionName)
+  if (loadedSection) {
+    loadedSection.classList.add("active")
+  }
+
+  // Initialize page-specific functionality AFTER content is loaded into DOM
+  window.initializeSection(sectionName)
 }
 
-function initializeSection(sectionName) {
+window.initializeSection = (sectionName) => {
   switch (sectionName) {
     case "home":
-      initializeHome()
+      if (typeof window.initializeHome === "function") window.initializeHome()
       break
     case "animals":
-      initializeAnimals()
+      if (typeof window.initializeAnimals === "function") window.initializeAnimals()
       break
     case "cart":
-      initializeCart()
+      if (typeof window.initializeCart === "function") window.initializeCart()
       break
     case "contact":
-      initializeContact()
+      if (typeof window.initializeContact === "function") window.initializeContact()
+      break
+    case "about":
+      if (typeof window.initializeAbout === "function") window.initializeAbout()
       break
   }
+  // Update cart display and user interface after any section load
+  window.updateCartCount()
+  window.updateUserInterface()
 }
-
-// Expose navigation functions globally
-window.showSection = showSection
-window.toggleMobileMenu = toggleMobileMenu

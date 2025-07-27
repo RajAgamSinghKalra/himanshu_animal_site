@@ -1,49 +1,8 @@
 // Authentication functions
-const showMessage = (modalId, type, message) => {
-  const modal = document.getElementById(modalId)
-  const messageElement = document.createElement("div")
-  messageElement.className = `message ${type}`
-  messageElement.textContent = message
-  modal.appendChild(messageElement)
+// These functions are now globally accessible via `window.`
+// They rely on `window.storage` and `window.openModal`, `window.closeModal`, `window.showMessage`, `window.updateUserInterface`, `window.updateCartCount`, `window.updateCartDisplay`, `window.showSection`
 
-  setTimeout(() => {
-    modal.removeChild(messageElement)
-  }, 3000)
-}
-
-const storage = window.storage
-
-const switchToLogin = () => {
-  document.getElementById("registerModal").style.display = "none"
-  document.getElementById("loginModal").style.display = "block"
-}
-
-const closeModal = (modalId) => {
-  document.getElementById(modalId).style.display = "none"
-}
-
-const updateCartCount = () => {
-  const cartCountElement = document.getElementById("cartCount")
-  const currentUser = storage.getCurrentUser()
-  if (currentUser) {
-    cartCountElement.textContent = currentUser.cart.length
-  } else {
-    cartCountElement.textContent = 0
-  }
-}
-
-const updateCartDisplay = () => {
-  const cartDisplayElement = document.getElementById("cartDisplay")
-  const currentUser = storage.getCurrentUser()
-  if (currentUser) {
-    cartDisplayElement.innerHTML = currentUser.cart.map((item) => `<li>${item.name}</li>`).join("")
-  } else {
-    cartDisplayElement.innerHTML = "<li>Your cart is empty.</li>"
-  }
-}
-
-
-function handleRegister(event) {
+window.handleRegister = (event) => {
   event.preventDefault()
 
   const formData = new FormData(event.target)
@@ -54,47 +13,46 @@ function handleRegister(event) {
 
   // Validation
   if (!name || !email || !password || !confirmPassword) {
-    showMessage("registerModal", "error", "All fields are required.")
+    window.showMessage("registerModal", "error", "All fields are required.")
     return
   }
 
   if (password.length < 6) {
-    showMessage("registerModal", "error", "Password must be at least 6 characters long.")
+    window.showMessage("registerModal", "error", "Password must be at least 6 characters long.")
     return
   }
 
   if (password !== confirmPassword) {
-    showMessage("registerModal", "error", "Passwords do not match.")
+    window.showMessage("registerModal", "error", "Passwords do not match.")
     return
   }
 
   // Check if user already exists
-  const existingUser = storage.findUserByEmail(email)
+  const existingUser = window.storage.findUserByEmail(email)
   if (existingUser) {
-    showMessage("registerModal", "error", "An account with this email already exists.")
+    window.showMessage("registerModal", "error", "An account with this email already exists.")
     return
   }
 
   // Create new user
-  const newUser = storage.addUser({
+  const newUser = window.storage.addUser({
     name: name,
     email: email,
-    password: password,
-    cart: [],
+    password: password, // In production, this should be hashed
   })
 
-  showMessage("registerModal", "success", "Account created successfully! You can now sign in.")
+  window.showMessage("registerModal", "success", "Account created successfully! You can now sign in.")
 
   // Clear form
   event.target.reset()
 
   // Auto-switch to login after 2 seconds
   setTimeout(() => {
-    switchToLogin()
+    window.switchToLogin()
   }, 2000)
 }
 
-function handleLogin(event) {
+window.handleLogin = (event) => {
   event.preventDefault()
 
   const formData = new FormData(event.target)
@@ -103,36 +61,37 @@ function handleLogin(event) {
 
   // Validation
   if (!email || !password) {
-    showMessage("loginModal", "error", "Email and password are required.")
+    window.showMessage("loginModal", "error", "Email and password are required.")
     return
   }
 
   // Authenticate user
-  const user = storage.authenticateUser(email, password)
+  const user = window.storage.authenticateUser(email, password)
   if (!user) {
-    showMessage("loginModal", "error", "Invalid email or password.")
+    window.showMessage("loginModal", "error", "Invalid email or password.")
     return
   }
 
   // Login successful
-  storage.setCurrentUser(user)
-  updateUserInterface()
+  // storage.setCurrentUser(user); // This is now handled by authenticateUser
+  window.updateUserInterface()
+  window.updateCartCount() // Update cart count on login
 
-  showMessage("loginModal", "success", `Welcome back, ${user.name}!`)
+  window.showMessage("loginModal", "success", `Welcome back, ${user.name}!`)
 
   // Close modal after 1 second
   setTimeout(() => {
-    closeModal("loginModal")
+    window.closeModal("loginModal")
   }, 1000)
 }
 
-function handleLogout() {
+window.handleLogout = () => {
   const confirmed = confirm("Are you sure you want to logout?")
   if (confirmed) {
-    storage.clearCurrentUser()
-    updateUserInterface()
-    updateCartCount()
-    updateCartDisplay()
+    window.storage.clearCurrentUser()
+    window.updateUserInterface()
+    window.updateCartCount()
+    window.updateCartDisplay() // Update cart display on logout
 
     // Show home section
     window.showSection("home")
@@ -141,29 +100,23 @@ function handleLogout() {
   }
 }
 
-function updateUserInterface() {
+window.updateUserInterface = () => {
   const guestMenu = document.getElementById("guestMenu")
   const userMenu = document.getElementById("userMenu")
   const userName = document.getElementById("userName")
   const userAvatar = document.getElementById("userAvatar")
 
-  const currentUser = storage.getCurrentUser()
+  const currentUser = window.storage.getCurrentUser()
 
   if (currentUser) {
     // User is logged in
-    guestMenu.style.display = "none"
-    userMenu.style.display = "flex"
-    userName.textContent = currentUser.name
-    userAvatar.textContent = currentUser.name.charAt(0).toUpperCase()
+    if (guestMenu) guestMenu.style.display = "none"
+    if (userMenu) userMenu.style.display = "flex"
+    if (userName) userName.textContent = currentUser.name
+    if (userAvatar) userAvatar.textContent = currentUser.name.charAt(0).toUpperCase()
   } else {
     // User is not logged in
-    guestMenu.style.display = "flex"
-    userMenu.style.display = "none"
+    if (guestMenu) guestMenu.style.display = "flex"
+    if (userMenu) userMenu.style.display = "none"
   }
 }
-
-// Expose auth functions globally for inline event handlers
-window.handleRegister = handleRegister
-window.handleLogin = handleLogin
-window.handleLogout = handleLogout
-window.updateUserInterface = updateUserInterface

@@ -1,7 +1,8 @@
 // About page functionality
-function getAboutContent() {
-  return `
-        <section id="about" class="section active">
+// This function is now globally accessible via `window.`
+
+window.getAboutContent = () => `
+        <section id="about" class="section">
             <div class="page-header">
                 <div class="container">
                     <h1>About Paws & Hearts</h1>
@@ -27,7 +28,9 @@ function getAboutContent() {
             </div>
         </section>
     `
-}
 
-// Expose about page helper globally
-window.getAboutContent = getAboutContent
+window.initializeAbout = () => {
+  // No specific dynamic elements to initialize on the about page currently,
+  // but this function is here for consistency and future extensibility.
+  console.log("Initializing About Section")
+}

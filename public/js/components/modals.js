@@ -1,14 +1,16 @@
 // Modal functions
-function openModal(modalId) {
+// These functions are now globally accessible via `window.`
+
+window.openModal = (modalId) => {
   const modal = document.getElementById(modalId)
   if (modal) {
     modal.classList.add("active")
     // Clear any previous messages
-    clearMessages(modalId)
+    window.clearMessages(modalId)
   }
 }
 
-function closeModal(modalId) {
+window.closeModal = (modalId) => {
   const modal = document.getElementById(modalId)
   if (modal) {
     modal.classList.remove("active")
@@ -17,21 +19,21 @@ function closeModal(modalId) {
     if (form) {
       form.reset()
     }
-    clearMessages(modalId)
+    window.clearMessages(modalId)
   }
 }
 
-function switchToLogin() {
-  closeModal("registerModal")
-  openModal("loginModal")
+window.switchToLogin = () => {
+  window.closeModal("registerModal")
+  window.openModal("loginModal")
 }
 
-function switchToRegister() {
-  closeModal("loginModal")
-  openModal("registerModal")
+window.switchToRegister = () => {
+  window.closeModal("loginModal")
+  window.openModal("registerModal")
 }
 
-function clearMessages(modalId) {
+window.clearMessages = (modalId) => {
   const modal = document.getElementById(modalId)
   if (modal) {
     const errorMsg = modal.querySelector(".error-message")
@@ -47,7 +49,7 @@ function clearMessages(modalId) {
   }
 }
 
-function showMessage(modalId, type, message) {
+window.showMessage = (modalId, type, message) => {
   const modal = document.getElementById(modalId)
   if (modal) {
     const messageElement = modal.querySelector(`.${type}-message`)
@@ -64,10 +66,3 @@ function showMessage(modalId, type, message) {
     }
   }
 }
-
-// Expose functions globally for inline event handlers
-window.openModal = openModal
-window.closeModal = closeModal
-window.switchToLogin = switchToLogin
-window.switchToRegister = switchToRegister
-window.showMessage = showMessage

@@ -1,5 +1,5 @@
 // Animal data
-const animals = [
+window.animals = [
   {
     id: 1,
     name: "Buddy",
@@ -103,6 +103,3 @@ const animals = [
     location: "Small Animal Room",
   },
 ]
-
-// Expose data globally so other scripts can access it
-window.animals = animals

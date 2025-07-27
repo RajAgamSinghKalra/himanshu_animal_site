@@ -1,9 +1,9 @@
 // Cart page functionality
-const storage = window.storage
+// These functions are now globally accessible via `window.`
+// They rely on `window.storage`, `window.animals`, `window.showSection`, `window.removeFromCart`, `window.proceedToAdoption`
 
-function getCartContent() {
-  return `
-        <section id="cart" class="section active">
+window.getCartContent = () => `
+        <section id="cart" class="section">
             <div class="page-header">
                 <div class="container">
                     <h1>Your Adoption Cart</h1>
@@ -43,18 +43,17 @@ function getCartContent() {
             </div>
         </section>
     `
+
+window.initializeCart = () => {
+  window.updateCartDisplay()
 }
 
-function initializeCart() {
-  updateCartDisplay()
-}
-
-function updateCartDisplay() {
+window.updateCartDisplay = () => {
   const cartItemsContainer = document.getElementById("cart-items")
   const cartEmptyContainer = document.getElementById("cart-empty")
   const cartSummaryContainer = document.getElementById("cart-summary")
 
-  const cart = storage.getCart()
+  const cart = window.storage.getCart() // Use global storage
   console.log("Updating cart display. Cart length:", cart.length)
 
   if (!cartItemsContainer || !cartEmptyContainer || !cartSummaryContainer) {
@@ -79,7 +78,7 @@ function updateCartDisplay() {
     .map(
       (item) => `
         <div class="cart-item">
-            <img src="${item.image}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/100x100/e67e22/ffffff?text=${item.name}'">
+            <img src="${item.image}" alt="${item.name}" onerror="this.src='/placeholder.svg?height=100&width=100&text=${item.name}'">
             <div class="cart-item-info">
                 <h3>${item.name}</h3>
                 <p>${item.breed}</p>
@@ -107,9 +106,3 @@ function updateCartDisplay() {
 
   console.log("Cart display updated successfully")
 }
-
-// Expose cart page helpers globally
-window.getCartContent = getCartContent
-window.initializeCart = initializeCart
-window.updateCartDisplay = updateCartDisplay
-

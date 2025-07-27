@@ -1,9 +1,8 @@
 // Home page functionality
-// Use the global animals data provided by data/animals.js
-const homeAnimals = window.animals
+// These functions are now globally accessible via `window.`
+// They rely on `window.animals`, `window.showSection`, `window.viewAnimalDetail`, `window.addToCart`, `window.createAnimalCard`
 
-function getHomeContent() {
-  return `
+window.getHomeContent = () => `
         <section id="home" class="section active">
             <div class="hero">
                 <div class="hero-content">
@@ -21,9 +20,9 @@ function getHomeContent() {
                 </div>
             </div>
 
-            <div class="features" style="padding: 80px 0; background: white;">
+            <div class="features">
                 <div class="container">
-                    <h2 style="text-align: center; font-size: 2.5rem; color: #2c3e50; margin-bottom: 60px;">Why Choose Paws & Hearts?</h2>
+                    <h2>Why Choose Paws & Hearts?</h2>
                     <div class="features-grid">
                         <div class="feature-card">
                             <div class="feature-icon">🏥</div>
@@ -44,9 +43,9 @@ function getHomeContent() {
                 </div>
             </div>
 
-            <div class="featured-animals" style="padding: 80px 0; background: #f8f9fa;">
+            <div class="featured-animals">
                 <div class="container">
-                    <h2 style="text-align: center; font-size: 2.5rem; color: #2c3e50; margin-bottom: 60px;">Featured Animals</h2>
+                    <h2>Featured Animals</h2>
                     <div class="animals-grid" id="featured-animals">
                         <!-- Featured animals will be loaded here by JavaScript -->
                     </div>
@@ -56,7 +55,7 @@ function getHomeContent() {
                 </div>
             </div>
 
-            <div class="stats" style="padding: 80px 0; background: #2c3e50; color: white;">
+            <div class="stats">
                 <div class="container">
                     <div class="stats-grid">
                         <div class="stat-item">
@@ -80,43 +79,15 @@ function getHomeContent() {
             </div>
         </section>
     `
+
+window.initializeHome = () => {
+  window.loadFeaturedAnimals()
 }
 
-function initializeHome() {
-  loadFeaturedAnimals()
-}
-
-function loadFeaturedAnimals() {
+window.loadFeaturedAnimals = () => {
   const featuredContainer = document.getElementById("featured-animals")
   if (!featuredContainer) return
 
-  const featuredAnimals = homeAnimals.slice(0, 3)
-  featuredContainer.innerHTML = featuredAnimals.map((animal) => createAnimalCard(animal)).join("")
+  const featuredAnimals = window.animals.slice(0, 3) // Use global animals
+  featuredContainer.innerHTML = featuredAnimals.map((animal) => window.createAnimalCard(animal)).join("")
 }
-
-function createAnimalCard(animal) {
-  return `
-        <div class="animal-card">
-            <img src="${animal.image}" alt="${animal.name}" onerror="this.src='https://via.placeholder.com/300x250/e67e22/ffffff?text=${animal.name}'">
-            <div class="animal-info">
-                <h3>${animal.name}</h3>
-                <div class="animal-meta">
-                    <span>${animal.breed}</span>
-                    <span>${animal.age}</span>
-                    <span>${animal.gender}</span>
-                </div>
-                <p>${animal.description.substring(0, 100)}...</p>
-                <div class="animal-price">$${animal.price}</div>
-                <div class="animal-actions">
-                    <button class="btn btn-secondary btn-small" onclick="viewAnimalDetail(${animal.id})">View Details</button>
-                    <button class="btn btn-primary btn-small" onclick="addToCart(${animal.id})">Add to Cart</button>
-                </div>
-            </div>
-        </div>
-    `
-}
-
-// Expose home page helpers globally
-window.getHomeContent = getHomeContent
-window.initializeHome = initializeHome
-

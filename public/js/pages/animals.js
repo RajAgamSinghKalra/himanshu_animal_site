@@ -1,24 +1,9 @@
 // Animals page functionality
-// Use the global animals data provided by data/animals.js
-const animalsData = window.animals
+// These functions are now globally accessible via `window.`
+// They rely on `window.animals`, `window.createAnimalCard`, `window.addToCart`, `window.viewAnimalDetail`
 
-function createAnimalCard(animal) {
-  return `
-    <div class="animal-card" onclick="viewAnimalDetail(${animal.id})">
-      <h2>${animal.name}</h2>
-      <p>Breed: ${animal.breed}</p>
-      <p>Type: ${animal.type}</p>
-      <p>Age: ${animal.age}</p>
-      <p>Size: ${animal.size}</p>
-      <p>Gender: ${animal.gender}</p>
-      <p>Price: $${animal.price}</p>
-    </div>
-  `
-}
-
-function getAnimalsContent() {
-  return `
-        <section id="animals" class="section active">
+window.getAnimalsContent = () => `
+        <section id="animals" class="section">
             <div class="page-header">
                 <div class="container">
                     <h1>Find Your Perfect Companion</h1>
@@ -52,7 +37,7 @@ function getAnimalsContent() {
                 </div>
             </div>
 
-            <div class="animals-listing" style="padding: 80px 0; background: #f8f9fa;">
+            <div class="animals-listing">
                 <div class="container">
                     <div class="animals-grid" id="animals-grid">
                         <!-- Animals will be loaded here by JavaScript -->
@@ -61,67 +46,60 @@ function getAnimalsContent() {
             </div>
         </section>
     `
+
+window.initializeAnimals = () => {
+  window.loadAllAnimals()
+  window.setupFilters()
 }
 
-function initializeAnimals() {
-  loadAllAnimals()
-  setupFilters()
-}
-
-function loadAllAnimals() {
+window.loadAllAnimals = () => {
   const animalsContainer = document.getElementById("animals-grid")
   if (!animalsContainer) return
 
-  displayAnimals(animalsData)
+  window.displayAnimals(window.animals) // Use global animals
 }
 
-function displayAnimals(animalsToShow) {
+window.displayAnimals = (animalsToShow) => {
   const animalsContainer = document.getElementById("animals-grid")
   if (!animalsContainer) return
 
   if (animalsToShow.length === 0) {
-    animalsContainer.innerHTML =
-      '<div style="text-align: center; padding: 40px; color: #7f8c8d;">No animals found matching your criteria.</div>'
+    animalsContainer.innerHTML = '<div class="loading">No animals found matching your criteria.</div>'
     return
   }
 
-  animalsContainer.innerHTML = animalsToShow.map((animal) => createAnimalCard(animal)).join("")
+  animalsContainer.innerHTML = animalsToShow.map((animal) => window.createAnimalCard(animal)).join("")
 }
 
-function setupFilters() {
+window.setupFilters = () => {
   const typeFilter = document.getElementById("type-filter")
   const ageFilter = document.getElementById("age-filter")
   const sizeFilter = document.getElementById("size-filter")
 
-  if (typeFilter) typeFilter.addEventListener("change", applyFilters)
-  if (ageFilter) ageFilter.addEventListener("change", applyFilters)
-  if (sizeFilter) sizeFilter.addEventListener("change", applyFilters)
+  if (typeFilter) typeFilter.addEventListener("change", window.applyFilters)
+  if (ageFilter) ageFilter.addEventListener("change", window.applyFilters)
+  if (sizeFilter) sizeFilter.addEventListener("change", window.applyFilters)
 }
 
-function applyFilters() {
-  const typeFilter = document.getElementById("type-filter")
-  const ageFilter = document.getElementById("age-filter")
-  const sizeFilter = document.getElementById("size-filter")
+window.applyFilters = () => {
+  const typeFilter = document.getElementById("type-filter").value
+  const ageFilter = document.getElementById("age-filter").value
+  const sizeFilter = document.getElementById("size-filter").value
 
-  if (!typeFilter || !ageFilter || !sizeFilter) return
-
-  const typeValue = typeFilter.value
-  const ageValue = ageFilter.value
-  const sizeValue = sizeFilter.value
-
-  const filteredAnimals = animalsData.filter((animal) => {
+  const filteredAnimals = window.animals.filter((animal) => {
+    // Use global animals
     return (
-      (!typeValue || animal.type === typeValue) &&
-      (!ageValue || animal.age === ageValue) &&
-      (!sizeValue || animal.size === sizeValue)
+      (!typeFilter || animal.type === typeFilter) &&
+      (!ageFilter || animal.age === ageFilter) &&
+      (!sizeFilter || animal.size === sizeFilter)
     )
   })
 
-  displayAnimals(filteredAnimals)
+  window.displayAnimals(filteredAnimals)
 }
 
-function viewAnimalDetail(animalId) {
-  const animal = animalsData.find((a) => a.id === animalId)
+window.viewAnimalDetail = (animalId) => {
+  const animal = window.animals.find((a) => a.id === animalId) // Use global animals
   if (!animal) return
 
   const detailText = `${animal.name} - ${animal.breed}
@@ -139,7 +117,3 @@ Location: ${animal.location}`
 
   alert(detailText)
 }
-
-// Expose animals page helpers globally
-window.getAnimalsContent = getAnimalsContent
-window.initializeAnimals = initializeAnimals

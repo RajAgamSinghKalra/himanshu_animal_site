@@ -1,7 +1,8 @@
 // Contact page functionality
-function getContactContent() {
-  return `
-        <section id="contact" class="section active">
+// These functions are now globally accessible via `window.`
+
+window.getContactContent = () => `
+        <section id="contact" class="section">
             <div class="page-header">
                 <div class="container">
                     <h1>Contact Us</h1>
@@ -66,16 +67,15 @@ function getContactContent() {
             </div>
         </section>
     `
-}
 
-function initializeContact() {
+window.initializeContact = () => {
   const contactForm = document.getElementById("contact-form")
   if (contactForm) {
-    contactForm.addEventListener("submit", handleContactForm)
+    contactForm.addEventListener("submit", window.handleContactForm)
   }
 }
 
-function handleContactForm(e) {
+window.handleContactForm = (e) => {
   e.preventDefault()
 
   const formData = new FormData(e.target)
@@ -90,7 +90,3 @@ function handleContactForm(e) {
   // Reset form
   e.target.reset()
 }
-
-// Expose contact page helpers globally
-window.getContactContent = getContactContent
-window.initializeContact = initializeContact

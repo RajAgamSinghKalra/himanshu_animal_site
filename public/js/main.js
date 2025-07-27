@@ -1,72 +1,52 @@
 // Main application initialization
 document.addEventListener("DOMContentLoaded", () => {
-  // Load current user and cart
-  const storage = window.storage // Declare storage variable
-  storage.loadCurrentUser()
-  storage.loadCart()
+  // Initialize storage (already done by storage.js loading)
+  // window.storage is now available globally
 
-  // Update UI
-  const updateUserInterface = window.updateUserInterface // Declare updateUserInterface variable
-  updateUserInterface()
-  const updateCartCount = window.updateCartCount // Declare updateCartCount variable
-  updateCartCount()
+  // Load current user and cart state from storage
+  window.storage.loadCurrentUser()
+  window.storage.loadCart()
+
+  // Update UI based on initial state
+  window.updateUserInterface()
+  window.updateCartCount()
 
   // Load home page by default
-  const showSection = window.showSection // Declare showSection variable
-  showSection("home")
+  window.showSection("home")
 
-  // Setup event listeners
-  setupEventListeners()
+  // Setup global event listeners
+  setupGlobalEventListeners()
 
   console.log("Application initialized successfully")
 })
 
-function setupEventListeners() {
+function setupGlobalEventListeners() {
   // Close modals when clicking outside
   window.addEventListener("click", (event) => {
-    const modals = document.querySelectorAll(".modal")
+    const modals = document.querySelectorAll(".modal.active") // Only target active modals
     modals.forEach((modal) => {
       if (event.target === modal) {
-        modal.classList.remove("active")
+        window.closeModal(modal.id)
       }
     })
   })
 
   // Add focus styles to form elements
-  document.addEventListener(
-    "focus",
-    (event) => {
-      if (event.target.matches("input, select, textarea")) {
-        event.target.style.borderColor = "#e67e22"
-      }
-    },
-    true,
-  )
+  document.addEventListener("focusin", (event) => {
+    // Use focusin for capturing phase
+    if (event.target.matches("input, select, textarea")) {
+      event.target.style.borderColor = "#e67e22"
+    }
+  })
 
-  document.addEventListener(
-    "blur",
-    (event) => {
-      if (event.target.matches("input, select, textarea")) {
-        event.target.style.borderColor = "#ddd"
-      }
-    },
-    true,
-  )
+  document.addEventListener("focusout", (event) => {
+    // Use focusout for capturing phase
+    if (event.target.matches("input, select, textarea")) {
+      event.target.style.borderColor = "#ddd"
+    }
+  })
 }
 
-// Debug functions
-function debugCart() {
-  console.log("Current cart:", window.storage.getCart())
-  console.log("Cart length:", window.storage.getCartCount())
-  return window.storage.getCart()
-}
-
-function debugUsers() {
-  console.log("All users:", window.storage.users)
-  console.log("Current user:", window.storage.getCurrentUser())
-  return { users: window.storage.users, currentUser: window.storage.getCurrentUser() }
-}
-
-// Make debug functions available globally
-window.debugCart = debugCart
-window.debugUsers = debugUsers
+// Debug functions (already globally exposed by previous iteration, just ensuring they are here)
+// window.debugCart = debugCart;
+// window.debugUsers = debugUsers;

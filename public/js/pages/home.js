@@ -1,37 +1,6 @@
 // Home page functionality
-const animals = [
-  {
-    id: 1,
-    name: "Buddy",
-    breed: "Golden Retriever",
-    age: "2 years",
-    gender: "Male",
-    description: "Buddy is a friendly and energetic dog who loves to play fetch.",
-    price: 500,
-    image: "https://example.com/buddy.jpg",
-  },
-  {
-    id: 2,
-    name: "Lucy",
-    breed: "Siamese",
-    age: "1 year",
-    gender: "Female",
-    description: "Lucy is a curious and affectionate cat who enjoys cuddling.",
-    price: 300,
-    image: "https://example.com/lucy.jpg",
-  },
-  {
-    id: 3,
-    name: "Max",
-    breed: "German Shepherd",
-    age: "3 years",
-    gender: "Male",
-    description: "Max is a loyal and protective dog who is great with kids.",
-    price: 700,
-    image: "https://example.com/max.jpg",
-  },
-  // Add more animals as needed
-]
+// Use the global animals data provided by data/animals.js
+const homeAnimals = window.animals
 
 function getHomeContent() {
   return `
@@ -121,7 +90,7 @@ function loadFeaturedAnimals() {
   const featuredContainer = document.getElementById("featured-animals")
   if (!featuredContainer) return
 
-  const featuredAnimals = animals.slice(0, 3)
+  const featuredAnimals = homeAnimals.slice(0, 3)
   featuredContainer.innerHTML = featuredAnimals.map((animal) => createAnimalCard(animal)).join("")
 }
 

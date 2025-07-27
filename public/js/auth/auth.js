@@ -11,39 +11,7 @@ const showMessage = (modalId, type, message) => {
   }, 3000)
 }
 
-const storage = {
-  users: [],
-  currentUser: null,
-
-  findUserByEmail(email) {
-    return this.users.find((user) => user.email === email)
-  },
-
-  addUser(user) {
-    this.users.push(user)
-    return user
-  },
-
-  authenticateUser(email, password) {
-    const user = this.findUserByEmail(email)
-    if (user && user.password === password) {
-      return user
-    }
-    return null
-  },
-
-  setCurrentUser(user) {
-    this.currentUser = user
-  },
-
-  clearCurrentUser() {
-    this.currentUser = null
-  },
-
-  getCurrentUser() {
-    return this.currentUser
-  },
-}
+const storage = window.storage
 
 const switchToLogin = () => {
   document.getElementById("registerModal").style.display = "none"
@@ -74,13 +42,6 @@ const updateCartDisplay = () => {
   }
 }
 
-const showSection = (sectionId) => {
-  const sections = document.querySelectorAll(".section")
-  sections.forEach((section) => {
-    section.style.display = "none"
-  })
-  document.getElementById(sectionId).style.display = "block"
-}
 
 function handleRegister(event) {
   event.preventDefault()
@@ -174,7 +135,7 @@ function handleLogout() {
     updateCartDisplay()
 
     // Show home section
-    showSection("home")
+    window.showSection("home")
 
     alert("You have been logged out successfully.")
   }
@@ -200,3 +161,9 @@ function updateUserInterface() {
     userMenu.style.display = "none"
   }
 }
+
+// Expose auth functions globally for inline event handlers
+window.handleRegister = handleRegister
+window.handleLogin = handleLogin
+window.handleLogout = handleLogout
+window.updateUserInterface = updateUserInterface

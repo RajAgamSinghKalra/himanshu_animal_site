@@ -95,3 +95,6 @@ class Storage {
 
 // Create global storage instance
 const storage = new Storage()
+
+// Make the storage instance available globally
+window.storage = storage

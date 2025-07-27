@@ -1,10 +1,5 @@
 // Cart page functionality
-const storage = {
-  getCart: () => {
-    // Mock implementation for demonstration purposes
-    return JSON.parse(localStorage.getItem("cart")) || []
-  },
-}
+const storage = window.storage
 
 function getCartContent() {
   return `
@@ -113,17 +108,8 @@ function updateCartDisplay() {
   console.log("Cart display updated successfully")
 }
 
-function showSection(sectionId) {
-  // Mock implementation for demonstration purposes
-  console.log(`Showing section: ${sectionId}`)
-}
+// Expose cart page helpers globally
+window.getCartContent = getCartContent
+window.initializeCart = initializeCart
+window.updateCartDisplay = updateCartDisplay
 
-function proceedToAdoption() {
-  // Mock implementation for demonstration purposes
-  console.log("Proceeding to adoption...")
-}
-
-function removeFromCart(itemId) {
-  // Mock implementation for demonstration purposes
-  console.log(`Removing item with ID: ${itemId}`)
-}

@@ -147,14 +147,7 @@ function createAnimalCard(animal) {
     `
 }
 
-function viewAnimalDetail(id) {
-  // Implement view animal detail functionality
-}
+// Expose home page helpers globally
+window.getHomeContent = getHomeContent
+window.initializeHome = initializeHome
 
-function addToCart(id) {
-  // Implement add to cart functionality
-}
-
-function showSection(sectionId) {
-  // Implement show section functionality
-}

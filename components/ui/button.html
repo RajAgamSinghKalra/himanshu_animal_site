@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Button Component</title>
+  <style>
+    .button {
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      border: none;
+    }
+    .button.default {
+      background: #e67e22;
+      color: #fff;
+    }
+    .button.default:hover {
+      background: #d35400;
+    }
+    .button.outline {
+      background: transparent;
+      color: #e67e22;
+      border: 2px solid #e67e22;
+    }
+    .button.outline:hover {
+      background: #e67e22;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <button class="button default">Primary Button</button>
+  <button class="button outline">Secondary Button</button>
+  <script>
+    // Example JS hook
+    document.querySelectorAll('.button').forEach(btn => {
+      btn.addEventListener('focus', () => btn.style.opacity = 0.8);
+      btn.addEventListener('blur', () => btn.style.opacity = 1);
+    });
+  </script>
+</body>
+</html>

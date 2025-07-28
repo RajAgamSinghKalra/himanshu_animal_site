@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkbox Component</title>
+  <style>
+    .checkbox {
+      position: relative;
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+    }
+    .checkbox input {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+    .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 16px;
+      height: 16px;
+      border: 2px solid #e67e22;
+      border-radius: 3px;
+      transition: background 0.2s ease;
+    }
+    .checkbox input:checked + .checkmark {
+      background: #e67e22;
+    }
+    .checkmark:after {
+      content: '';
+      position: absolute;
+      display: none;
+      left: 4px;
+      top: 0px;
+      width: 4px;
+      height: 8px;
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+    .checkbox input:checked + .checkmark:after {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <label class="checkbox">
+    <input type="checkbox" />
+    <span class="checkmark"></span>
+  </label>
+  <script>
+    document.querySelector('.checkbox input').addEventListener('change', (e) => {
+      console.log('Checkbox checked:', e.target.checked);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Avatar Component</title>
+  <link rel="stylesheet" href="../../public/css/main.css">
+  <style>
+    .avatar {
+      display: inline-flex;
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .avatar-fallback {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: #eee;
+      color: #555;
+      width: 100%;
+      height: 100%;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="avatar">
+    <img src="../../public/placeholder-user.jpg" alt="User avatar" onerror="showFallback(this)">
+    <span class="avatar-fallback">U</span>
+  </div>
+
+  <script>
+    function showFallback(img) {
+      img.style.display = 'none';
+      img.nextElementSibling.style.display = 'flex';
+    }
+  </script>
+</body>
+</html>

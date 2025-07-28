@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Alert Dialog Component</title>
+  <link rel="stylesheet" href="../../public/css/modals.css">
+  <style>
+    /* Component specific styles */
+    #alertDialog .modal-content {
+      text-align: center;
+    }
+    #alertDialog button {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Trigger button -->
+  <button class="btn btn-primary" onclick="openModal('alertDialog')">Open Alert</button>
+
+  <!-- Alert Dialog Modal -->
+  <div id="alertDialog" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal('alertDialog')">&times;</span>
+      <div class="modal-header">
+        <h2>Delete Item</h2>
+        <p>Are you sure you want to delete this item?</p>
+      </div>
+      <div>
+        <button class="btn btn-secondary" onclick="closeModal('alertDialog')">Cancel</button>
+        <button class="btn btn-primary" onclick="confirmDelete()">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../public/js/components/modals.js"></script>
+  <script>
+    function confirmDelete() {
+      alert('Item deleted');
+      closeModal('alertDialog');
+    }
+  </script>
+</body>
+</html>

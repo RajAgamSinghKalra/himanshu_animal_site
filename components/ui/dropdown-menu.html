@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dropdown Menu</title>
+  <style>
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #fff;
+      min-width: 160px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      padding: 12px 16px;
+      z-index: 1;
+      border-radius: 8px;
+    }
+    .dropdown.show .dropdown-content {
+      display: block;
+    }
+    .dropdown-content a {
+      display: block;
+      padding: 8px 0;
+      color: #333;
+      text-decoration: none;
+    }
+    .dropdown-content a:hover {
+      color: #e67e22;
+    }
+  </style>
+</head>
+<body>
+  <div class="dropdown" id="simpleDropdown">
+    <button class="btn btn-primary" onclick="toggleDropdown('simpleDropdown')">Menu</button>
+    <div class="dropdown-content">
+      <a href="#">Item 1</a>
+      <a href="#">Item 2</a>
+      <a href="#">Item 3</a>
+    </div>
+  </div>
+
+  <script>
+    function toggleDropdown(id) {
+      const el = document.getElementById(id);
+      el.classList.toggle('show');
+    }
+    document.addEventListener('click', (e) => {
+      const dropdown = document.getElementById('simpleDropdown');
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('show');
+      }
+    });
+  </script>
+</body>
+</html>

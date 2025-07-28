@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Slider Component</title>
+  <style>
+    .slider-container {
+      width: 100%;
+      max-width: 300px;
+      margin: 20px auto;
+    }
+    .slider {
+      width: 100%;
+    }
+    .slider-value {
+      margin-top: 8px;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="slider-container">
+    <input id="demo-slider" class="slider" type="range" min="0" max="100" value="50" />
+    <div id="slider-value" class="slider-value">50</div>
+  </div>
+  <script>
+    const slider = document.getElementById('demo-slider');
+    const valueEl = document.getElementById('slider-value');
+    slider.addEventListener('input', () => {
+      valueEl.textContent = slider.value;
+    });
+  </script>
+</body>
+</html>

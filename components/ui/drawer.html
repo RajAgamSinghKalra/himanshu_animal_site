@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Drawer Component</title>
+  <style>
+    body {
+      margin: 0;
+    }
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      display: none;
+    }
+    .drawer {
+      position: fixed;
+      bottom: -300px;
+      left: 0;
+      right: 0;
+      background: #fff;
+      padding: 20px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      box-shadow: 0 -4px 6px rgba(0,0,0,0.1);
+      transition: bottom 0.3s ease;
+    }
+    .drawer.open {
+      bottom: 0;
+    }
+    .drawer-overlay.open {
+      display: block;
+    }
+    button {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      background: #333;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <button id="openDrawer">Open Drawer</button>
+
+  <div id="drawerOverlay" class="drawer-overlay"></div>
+  <div id="drawer" class="drawer">
+    <p>This drawer slides up from the bottom using plain JS.</p>
+    <button id="closeDrawer">Close</button>
+  </div>
+
+  <script>
+    const openBtn = document.getElementById('openDrawer');
+    const closeBtn = document.getElementById('closeDrawer');
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('drawerOverlay');
+
+    function openDrawer() {
+      drawer.classList.add('open');
+      overlay.classList.add('open');
+    }
+
+    function closeDrawer() {
+      drawer.classList.remove('open');
+      overlay.classList.remove('open');
+    }
+
+    openBtn.addEventListener('click', openDrawer);
+    closeBtn.addEventListener('click', closeDrawer);
+    overlay.addEventListener('click', closeDrawer);
+  </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hover Card Component</title>
+  <style>
+    .trigger {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 4px;
+      background: #333;
+      color: white;
+      cursor: pointer;
+    }
+    .card {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      width: 200px;
+      display: none;
+    }
+    .wrapper {
+      position: relative;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="trigger" id="hoverTrigger">Hover me</div>
+    <div class="card" id="hoverCard">
+      <p>This card appears on hover.</p>
+    </div>
+  </div>
+
+  <script>
+    const trigger = document.getElementById('hoverTrigger');
+    const card = document.getElementById('hoverCard');
+
+    trigger.addEventListener('mouseenter', () => {
+      card.style.display = 'block';
+    });
+    trigger.addEventListener('mouseleave', () => {
+      card.style.display = 'none';
+    });
+  </script>
+</body>
+</html>

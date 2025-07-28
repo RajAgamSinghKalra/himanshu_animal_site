@@ -1,11 +1,7 @@
-"use client";
+"use client"
 
-export default function Home() {
-  return (
-    <iframe
-      src="/index.html"
-      style={{ width: "100%", height: "100vh", border: "none" }}
-      title="Paws & Hearts"
-    />
-  );
+import  from "../public/js/components/modals"
+
+export default function SyntheticV0PageForDeployment() {
+  return < />
 }

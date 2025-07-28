@@ -3,46 +3,46 @@
 // They rely on `window.storage`, `window.animals`, `window.showSection`, `window.removeFromCart`, `window.proceedToAdoption`
 
 window.getCartContent = () => `
-        <section id="cart" class="section">
-            <div class="page-header">
-                <div class="container">
-                    <h1>Your Adoption Cart</h1>
-                    <p>Review your selected animals before proceeding with adoption</p>
-                </div>
-            </div>
+      <section id="cart" class="section">
+          <div class="page-header">
+              <div class="container">
+                  <h1>Your Adoption Cart</h1>
+                  <p>Review your selected animals before proceeding with adoption</p>
+              </div>
+          </div>
 
-            <div style="padding: 60px 0;">
-                <div class="container">
-                    <div id="cart-items">
-                        <!-- Cart items will be loaded here by JavaScript -->
-                    </div>
-                    <div id="cart-empty" class="cart-empty" style="display: none;">
-                        <h3>Your cart is empty</h3>
-                        <p>Browse our available animals and add them to your cart to start the adoption process.</p>
-                        <button class="btn btn-primary" onclick="showSection('animals')">Browse Animals</button>
-                    </div>
-                    <div id="cart-summary" class="cart-summary" style="display: none;">
-                        <div>
-                            <h3>Adoption Summary</h3>
-                            <div style="display: flex; justify-content: space-between; margin: 15px 0; padding-bottom: 15px; border-bottom: 1px solid #eee;">
-                                <span>Total Animals:</span>
-                                <span id="total-animals">0</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; margin: 15px 0; padding-bottom: 15px; border-bottom: 1px solid #eee;">
-                                <span>Adoption Fees:</span>
-                                <span id="total-fees">$0</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; margin: 15px 0; padding-bottom: 15px; font-size: 1.2rem; font-weight: 600; color: #2c3e50;">
-                                <span>Total:</span>
-                                <span id="grand-total">$0</span>
-                            </div>
-                            <button class="btn btn-primary btn-full" onclick="proceedToAdoption()">Proceed to Adoption</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    `
+          <div style="padding: 60px 0;">
+              <div class="container">
+                  <div id="cart-items">
+                      <!-- Cart items will be loaded here by JavaScript -->
+                  </div>
+                  <div id="cart-empty" class="cart-empty" style="display: none;">
+                      <h3>Your cart is empty</h3>
+                      <p>Browse our available animals and add them to your cart to start the adoption process.</p>
+                      <button class="btn btn-primary" onclick="showSection('animals')">Browse Animals</button>
+                  </div>
+                  <div id="cart-summary" class="cart-summary" style="display: none;">
+                      <div>
+                          <h3>Adoption Summary</h3>
+                          <div style="display: flex; justify-content: space-between; margin: 15px 0; padding-bottom: 15px; border-bottom: 1px solid #eee;">
+                              <span>Total Animals:</span>
+                              <span id="total-animals">0</span>
+                          </div>
+                          <div style="display: flex; justify-content: space-between; margin: 15px 0; padding-bottom: 15px; border-bottom: 1px solid #eee;">
+                              <span>Adoption Fees:</span>
+                              <span id="total-fees">$0</span>
+                          </div>
+                          <div style="display: flex; justify-content: space-between; margin: 15px 0; padding-bottom: 15px; font-size: 1.2rem; font-weight: 600; color: #2c3e50;">
+                              <span>Total:</span>
+                              <span id="grand-total">$0</span>
+                          </div>
+                          <button class="btn btn-primary btn-full" onclick="proceedToAdoption()">Proceed to Adoption</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+  `
 
 window.initializeCart = () => {
   window.updateCartDisplay()
@@ -77,16 +77,16 @@ window.updateCartDisplay = () => {
   const cartItemsHTML = cart
     .map(
       (item) => `
-        <div class="cart-item">
-            <img src="${item.image}" alt="${item.name}" onerror="this.src='/placeholder.svg?height=100&width=100&text=${item.name}'">
-            <div class="cart-item-info">
-                <h3>${item.name}</h3>
-                <p>${item.breed}</p>
-            </div>
-            <div class="cart-item-price">$${item.price}</div>
-            <button class="remove-btn" onclick="removeFromCart(${item.id})">Remove</button>
-        </div>
-    `,
+      <div class="cart-item">
+          <img src="${item.image}" alt="${item.name}" onerror="this.src='/placeholder.svg?height=100&width=100&text=${item.name}'">
+          <div class="cart-item-info">
+              <h3>${item.name}</h3>
+              <p>${item.breed}</p>
+          </div>
+          <div class="cart-item-price">$${item.price}</div>
+          <button class="remove-btn" onclick="removeFromCart(${item.id})">Remove</button>
+      </div>
+  `,
     )
     .join("")
 

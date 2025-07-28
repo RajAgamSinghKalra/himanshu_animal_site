@@ -3,49 +3,49 @@
 // They rely on `window.animals`, `window.createAnimalCard`, `window.addToCart`, `window.viewAnimalDetail`
 
 window.getAnimalsContent = () => `
-        <section id="animals" class="section">
-            <div class="page-header">
-                <div class="container">
-                    <h1>Find Your Perfect Companion</h1>
-                    <p>Browse our available animals and find your new best friend</p>
-                </div>
-            </div>
+      <section id="animals" class="section">
+          <div class="page-header">
+              <div class="container">
+                  <h1>Find Your Perfect Companion</h1>
+                  <p>Browse our available animals and find your new best friend</p>
+              </div>
+          </div>
 
-            <div class="filters">
-                <div class="container">
-                    <div class="filter-controls">
-                        <select id="type-filter" onchange="applyFilters()">
-                            <option value="">All Animals</option>
-                            <option value="dog">Dogs</option>
-                            <option value="cat">Cats</option>
-                            <option value="rabbit">Rabbits</option>
-                            <option value="bird">Birds</option>
-                        </select>
-                        <select id="age-filter" onchange="applyFilters()">
-                            <option value="">All Ages</option>
-                            <option value="young">Young (0-2 years)</option>
-                            <option value="adult">Adult (2-7 years)</option>
-                            <option value="senior">Senior (7+ years)</option>
-                        </select>
-                        <select id="size-filter" onchange="applyFilters()">
-                            <option value="">All Sizes</option>
-                            <option value="small">Small</option>
-                            <option value="medium">Medium</option>
-                            <option value="large">Large</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
+          <div class="filters">
+              <div class="container">
+                  <div class="filter-controls">
+                      <select id="type-filter" onchange="applyFilters()">
+                          <option value="">All Animals</option>
+                          <option value="dog">Dogs</option>
+                          <option value="cat">Cats</option>
+                          <option value="rabbit">Rabbits</option>
+                          <option value="bird">Birds</option>
+                      </select>
+                      <select id="age-filter" onchange="applyFilters()">
+                          <option value="">All Ages</option>
+                          <option value="young">Young (0-2 years)</option>
+                          <option value="adult">Adult (2-7 years)</option>
+                          <option value="senior">Senior (7+ years)</option>
+                      </select>
+                      <select id="size-filter" onchange="applyFilters()">
+                          <option value="">All Sizes</option>
+                          <option value="small">Small</option>
+                          <option value="medium">Medium</option>
+                          <option value="large">Large</option>
+                      </select>
+                  </div>
+              </div>
+          </div>
 
-            <div class="animals-listing">
-                <div class="container">
-                    <div class="animals-grid" id="animals-grid">
-                        <!-- Animals will be loaded here by JavaScript -->
-                    </div>
-                </div>
-            </div>
-        </section>
-    `
+          <div class="animals-listing">
+              <div class="container">
+                  <div class="animals-grid" id="animals-grid">
+                      <!-- Animals will be loaded here by JavaScript -->
+                  </div>
+              </div>
+          </div>
+      </section>
+  `
 
 window.initializeAnimals = () => {
   window.loadAllAnimals()

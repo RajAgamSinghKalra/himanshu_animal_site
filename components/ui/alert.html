@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Alert Component</title>
+  <link rel="stylesheet" href="../../public/css/main.css">
+  <style>
+    .alert {
+      position: relative;
+      padding: 16px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      background: #f8f9fa;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+    .alert.destructive {
+      background: #ffe5e5;
+      border-color: #ff4d4f;
+      color: #b00020;
+    }
+    .alert button.close {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: transparent;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="alert" id="simpleAlert">
+    <button class="close" onclick="dismiss('simpleAlert')">&times;</button>
+    <strong>Heads up!</strong> This alert is simple HTML and CSS.
+  </div>
+
+  <div class="alert destructive" id="alertDestructive">
+    <button class="close" onclick="dismiss('alertDestructive')">&times;</button>
+    <strong>Warning!</strong> Something went wrong.
+  </div>
+
+  <script>
+    function dismiss(id) {
+      var el = document.getElementById(id);
+      if (el) {
+        el.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>

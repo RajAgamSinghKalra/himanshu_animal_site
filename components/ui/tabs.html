@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tabs Component</title>
+  <style>
+    .tabs {
+      display: flex;
+      gap: 8px;
+      border-bottom: 1px solid #ddd;
+    }
+    .tab-trigger {
+      background: none;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .tab-trigger.active {
+      border-bottom: 2px solid #e67e22;
+      color: #e67e22;
+    }
+    .tab-content {
+      display: none;
+      padding: 16px 0;
+    }
+    .tab-content.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="tabs">
+    <button class="tab-trigger active" data-target="tab1">Tab 1</button>
+    <button class="tab-trigger" data-target="tab2">Tab 2</button>
+  </div>
+  <div id="tab1" class="tab-content active">
+    Content for tab 1
+  </div>
+  <div id="tab2" class="tab-content">
+    Content for tab 2
+  </div>
+  <script>
+    document.querySelectorAll('.tab-trigger').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.tab-trigger').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+        button.classList.add('active');
+        const target = button.getAttribute('data-target');
+        document.getElementById(target).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

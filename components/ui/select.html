@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Select Component</title>
+  <style>
+    .select {
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <label for="simple-select">Choose a fruit:</label>
+  <select id="simple-select" class="select">
+    <option>Apple</option>
+    <option>Banana</option>
+    <option>Cherry</option>
+  </select>
+  <script>
+    document.getElementById('simple-select').addEventListener('change', function() {
+      console.log('Selected value:', this.value);
+    });
+  </script>
+</body>
+</html>

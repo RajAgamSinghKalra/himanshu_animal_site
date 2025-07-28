@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Breadcrumb Component</title>
+  <style>
+    .breadcrumb {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: #6b7280;
+    }
+    .breadcrumb a {
+      color: #0d6efd;
+      text-decoration: none;
+    }
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+    .breadcrumb .separator {
+      margin: 0 4px;
+    }
+  </style>
+</head>
+<body>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li><a href="#">Home</a></li>
+      <span class="separator">&gt;</span>
+      <li><a href="#">Library</a></li>
+      <span class="separator">&gt;</span>
+      <li>Data</li>
+    </ol>
+  </nav>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Alert Dialog</title>
+  <link rel="stylesheet" href="../../public/css/main.css">
+  <style>
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      display: none;
+    }
+    .dialog {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      display: none;
+      width: 90%;
+      max-width: 320px;
+    }
+    .actions {
+      margin-top: 16px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+    button {
+      padding: 6px 12px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+    }
+    .outline {
+      background: transparent;
+      border: 1px solid #333;
+    }
+    .primary {
+      background: #333;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <button id="openAlert">Open Alert</button>
+
+  <div id="alertOverlay" class="overlay"></div>
+  <div id="alertDialog" class="dialog">
+    <h3>Are you sure?</h3>
+    <p>This action cannot be undone.</p>
+    <div class="actions">
+      <button id="cancelBtn" class="outline">Cancel</button>
+      <button id="confirmBtn" class="primary">Confirm</button>
+    </div>
+  </div>
+
+  <script>
+    const openBtn = document.getElementById('openAlert');
+    const overlay = document.getElementById('alertOverlay');
+    const dialog = document.getElementById('alertDialog');
+    const cancelBtn = document.getElementById('cancelBtn');
+
+    function openDialog() {
+      overlay.style.display = 'block';
+      dialog.style.display = 'block';
+    }
+    function closeDialog() {
+      overlay.style.display = 'none';
+      dialog.style.display = 'none';
+    }
+
+    openBtn.addEventListener('click', openDialog);
+    overlay.addEventListener('click', closeDialog);
+    cancelBtn.addEventListener('click', closeDialog);
+  </script>
+</body>
+</html>

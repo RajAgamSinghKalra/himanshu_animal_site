@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Breadcrumb Component</title>
+  <link rel="stylesheet" href="../../public/css/main.css">
+  <style>
+    .breadcrumb {
+      display: flex;
+      gap: 4px;
+      font-size: 14px;
+      list-style: none;
+      padding: 0;
+    }
+    .breadcrumb a {
+      color: #3498db;
+      text-decoration: none;
+    }
+    .breadcrumb span {
+      margin: 0 4px;
+    }
+  </style>
+</head>
+<body>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li><a href="#">Home</a></li>
+      <span>/</span>
+      <li><a href="#">Animals</a></li>
+      <span>/</span>
+      <li>Dogs</li>
+    </ol>
+  </nav>
+</body>
+</html>

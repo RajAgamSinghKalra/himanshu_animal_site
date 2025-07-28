@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Theme Provider</title>
+  <link rel="stylesheet" href="../public/css/main.css">
+  <style>
+    body.dark {
+      background: #333;
+      color: #f8f8f8;
+    }
+    .theme-toggle {
+      padding: 8px 16px;
+      background: #333;
+      color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <button class="theme-toggle" id="themeToggle">Toggle Theme</button>
+  <script>
+    const btn = document.getElementById('themeToggle');
+    btn.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+    });
+  </script>
+</body>
+</html>

@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Breadcrumb Component</title>
   <style>
+<<<<<<< HEAD
     .breadcrumb {
       display: flex;
       flex-wrap: wrap;
@@ -21,10 +22,27 @@
     }
     .breadcrumb .separator {
       margin: 0 4px;
+=======
+    nav.breadcrumb {
+      font-size: 14px;
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    nav.breadcrumb a {
+      text-decoration: none;
+      color: #0070f3;
+    }
+    nav.breadcrumb .separator {
+      margin: 0 4px;
+      color: #666;
+>>>>>>> origin/e0rmy6-codex/replace-react-and-tailwind-files
     }
   </style>
 </head>
 <body>
+<<<<<<< HEAD
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li><a href="#">Home</a></li>
@@ -33,6 +51,14 @@
       <span class="separator">&gt;</span>
       <li>Data</li>
     </ol>
+=======
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <a href="#">Home</a>
+    <span class="separator">/</span>
+    <a href="#">Library</a>
+    <span class="separator">/</span>
+    <span aria-current="page">Data</span>
+>>>>>>> origin/e0rmy6-codex/replace-react-and-tailwind-files
   </nav>
 </body>
 </html>

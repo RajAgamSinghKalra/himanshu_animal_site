@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dialog Component</title>
+  <style>
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      display: none;
+    }
+    .dialog {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      width: 300px;
+      display: none;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .dialog.open,
+    .overlay.open {
+      display: block;
+    }
+    .header {
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .footer {
+      margin-top: 20px;
+      text-align: right;
+    }
+    button {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      background: #333;
+      color: white;
+      cursor: pointer;
+    }
+    button.close {
+      background: #999;
+    }
+  </style>
+</head>
+<body>
+  <button id="openDialog">Open Dialog</button>
+
+  <div id="dialogOverlay" class="overlay"></div>
+  <div id="dialog" class="dialog">
+    <div class="header">Simple Dialog</div>
+    <p>This dialog is built with plain HTML, CSS and JS.</p>
+    <div class="footer">
+      <button id="closeDialog" class="close">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const openBtn = document.getElementById('openDialog');
+    const closeBtn = document.getElementById('closeDialog');
+    const overlay = document.getElementById('dialogOverlay');
+    const dialog = document.getElementById('dialog');
+
+    function openDialog() {
+      overlay.classList.add('open');
+      dialog.classList.add('open');
+    }
+
+    function closeDialog() {
+      overlay.classList.remove('open');
+      dialog.classList.remove('open');
+    }
+
+    openBtn.addEventListener('click', openDialog);
+    closeBtn.addEventListener('click', closeDialog);
+    overlay.addEventListener('click', closeDialog);
+  </script>
+</body>
+</html>

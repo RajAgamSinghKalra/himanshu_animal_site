@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Badge Component</title>
+  <link rel="stylesheet" href="../../public/css/main.css">
+  <style>
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 8px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 500;
+      border: 1px solid transparent;
+    }
+    .badge.default {
+      background: #3498db;
+      color: #fff;
+    }
+    .badge.secondary {
+      background: #95a5a6;
+      color: #fff;
+    }
+    .badge.outline {
+      background: transparent;
+      border-color: #3498db;
+      color: #3498db;
+    }
+  </style>
+</head>
+<body>
+  <span class="badge default">Default</span>
+  <span class="badge secondary">Secondary</span>
+  <span class="badge outline">Outline</span>
+</body>
+</html>
